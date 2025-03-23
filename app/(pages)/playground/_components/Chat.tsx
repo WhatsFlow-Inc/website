@@ -115,7 +115,7 @@ export default function Chat() {
     };
 
     return (
-        <div className="flex flex-col h-screen dark:bg-black bg-white dark:text-white text-black w-1/4">
+        <div className="flex flex-col h-screen dark:bg-black bg-white dark:text-white text-black">
             {/* Main Chat Area */}
             <div className="flex-1 flex flex-col h-[65vh]">
                 <header className="flex items-center justify-between py-3 px-4 border-b dark:border-zinc-800 border-zinc-200">
