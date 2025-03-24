@@ -1,66 +1,89 @@
 import { Control } from "react-hook-form";
 
 export interface WapJSON {
-    version: string;
-    screens: Screen[];
-    data_api_version?: string;
-    routing_model?: Record<string, any>;
+  version: string;
+  screens: Screen[];
+  data_api_version?: string;
+  routing_model?: Record<string, any>;
 }
 
 export interface LayoutChild {
-    type: string;
-    text?: string | string[];
-    visible?: boolean;
-    label?: string;
-    markdown?: boolean;
-    name?: string;
-    required?: boolean;
-    "input-type"?: string;
-    pattern?: string;
-    "helper-text"?: string;
-    children?: LayoutChild[];
-    "init-values"?: Record<string, any>;
-    "on-click-action"?: {
+  type: string;
+  text?: string | string[];
+  visible?: boolean;
+  label?: string;
+  markdown?: boolean;
+  name?: string;
+  required?: boolean;
+  "input-type"?: string;
+  "min-date"?: string;
+  "max-date"?: string;
+  "unavailable-dates"?:string[]
+  pattern?: string;
+  "helper-text"?: string;
+  children?: LayoutChild[];
+  "init-values"?: Record<string, any>;
+  "on-click-action"?: {
+    name: string;
+    payload: Record<string, any>;
+    next?: {
+      type?: string;
+      name?: string;
+    }
+  };
+  "on-select-action"?: {
+    name: string;
+    payload: Record<string, any>;
+  };
+  description?: string;
+  "data-source"?: string | CheckboxItem[];
+  "list-items"?: {
+    id: string;
+    "main-content": {
+      title: string;
+      metadata: string;
+    },
+    end: {
+      title: string;
+      description: string;
+    },
+    "on-click-action": {
+      name: string;
+      next: {
         name: string;
-        payload: Record<string, any>;
-        next?:{
-          type?:string;
-          name?:string;
-        }
-    };
-    "on-select-action"?: {
-        name: string;
-        payload: Record<string, any>;
-    };
-    description?: string;
-    "data-source"?: string | CheckboxItem[];
+        type: string;
+      },
+      payload: object
+    }
+  }[];
+  "max-selected-items"?:number
 }
 
 export interface CheckboxItem {
-    id: string;
-    title: string;
+  id: string;
+  title: string;
 }
 
 export interface Layout {
-    type: string;
-    children: LayoutChild[];
+  type: string;
+  children: LayoutChild[];
 }
 
 export interface Screen {
-    id: string;
-    title: string;
-    terminal: boolean;
-    layout: Layout;
-    data?: {
-        [key: string]: any;
-    };
+  id: string;
+  title: string;
+  terminal?: boolean;
+  layout: Layout;
+  data?: {
+    [key: string]: any;
+  };
 }
 
 // Context Menu component
 export interface ContextMenuProps {
-    isOpen: boolean;
-    onClose: () => void;
-    position: { x: number; y: number };
+  isOpen: boolean;
+  onClose: () => void;
+  position: { x: number; y: number };
 }
 
 export interface ChatPreviewProps {
@@ -114,4 +137,17 @@ export interface OptInProps {
   label: string;
   required?: boolean;
   onClickAction?: any;
+}
+
+export interface ChipItem {
+    id: string;
+    title: string;
+}
+
+export interface ChipsSelectorProps {
+    name: string;
+    label?: string;
+    description?: string;
+    "max-selected-items"?: number;
+    "data-source"?: ChipItem[];
 }

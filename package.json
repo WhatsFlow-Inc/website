@@ -110,5 +110,12 @@
     "postcss": "latest",
     "tailwindcss": "^3.4.17",
     "typescript": "latest"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@clerk/shared",
+      "esbuild",
+      "sharp"
+    ]
   }
 }

@@ -1,6 +1,5 @@
 import { WapJSON } from "@/types/flowJSON";
 
-// Updated WAP JSON with checkbox screen
 export const wapJSON: WapJSON = {
     "version": "7.0",
     "data_api_version": "3.0",
@@ -332,6 +331,299 @@ export const wapJSON: WapJSON = {
                                 }
                             }
                         ]
+                    }
+                ]
+            }
+        },
+        {
+            "id": "DEMO_SCREEN_DROPDWON",
+            "terminal": true,
+            "title": "Dropdown Preview",
+            "data": {
+                "all_burgers": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "string"
+                            },
+                            "title": {
+                                "type": "string"
+                            },
+                            "description": {
+                                "type": "string"
+                            },
+                            "metadata": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "__example__": [
+                        {
+                            "id": "1_bef",
+                            "title": "Beef burger",
+                            "description": "Beef, red onion relish, lettuce",
+                            "metadata": "$9.99"
+                        },
+                        {
+                            "id": "2_chick",
+                            "title": "Chicken burger",
+                            "description": "Grilled chicken breast, cheese, buffalo sause",
+                            "metadata": "$10.99"
+                        }
+                    ]
+                }
+            },
+            "layout": {
+                "type": "SingleColumnLayout",
+                "children": [
+                    {
+                        "type": "Form",
+                        "name": "text_input_form",
+                        "children": [
+                            {
+                                "type": "Dropdown",
+                                "name": "burger",
+                                "label": "Burgers",
+                                "required": true,
+                                "data-source": "${data.all_burgers}",
+                                "on-select-action": {
+                                    "name": "data_exchange",
+                                    "payload": {
+                                        "burger": "${form.burger}"
+                                    }
+                                }
+                            },
+                            {
+                                "type": "Footer",
+                                "label": "Continue",
+                                "on-click-action": {
+                                    "name": "data_exchange",
+                                    "payload": {}
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "id": "DEMO_SCREEN_EL",
+            "title": "Embedded Link",
+            "layout": {
+                "type": "SingleColumnLayout",
+                "children": [
+                    {
+                        "type": "EmbeddedLink",
+                        "text": "This is an embedded link",
+                        "on-click-action": {
+                            "name": "navigate",
+                            "next": {
+                                "type": "screen",
+                                "name": "FINISH"
+                            },
+                            "payload": {
+                                "test_payload": "This is a test_payload"
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "id": "DEMO_SCREEN_DATE_PCIKER",
+            "terminal": true,
+            "title": "Date Picker Demo",
+            "layout": {
+                "type": "SingleColumnLayout",
+                "children": [
+                    {
+                        "type": "Form",
+                        "name": "form_name",
+                        "children": [
+                            {
+                                "type": "DatePicker",
+                                "name": "date",
+                                "label": "Date",
+                                "min-date": "1693569600000",
+                                "max-date": "1767182400000",
+                                "unavailable-dates": [
+                                    "1694779200000",
+                                    "1697371200000"
+                                ],
+                                "on-select-action": {
+                                    "name": "data_exchange",
+                                    "payload": {
+                                        "date": "${form.date}"
+                                    }
+                                }
+                            },
+                            {
+                                "type": "Footer",
+                                "label": "Continue",
+                                "on-click-action": {
+                                    "name": "data_exchange",
+                                    "payload": {}
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "id": "FIRST_SCREEN",
+            "title": "Our offers",
+            "data": {},
+            "layout": {
+                "type": "SingleColumnLayout",
+                "children": [
+                    {
+                        "type": "NavigationList",
+                        "name": "insurances",
+                        "list-items": [
+                            {
+                                "id": "home",
+                                "main-content": {
+                                    "title": "Home Insurance",
+                                    "metadata": "Safeguard your home against natural disasters, theft, and accidents"
+                                },
+                                "end": {
+                                    "title": "$100",
+                                    "description": "/ month"
+                                },
+                                "on-click-action": {
+                                    "name": "navigate",
+                                    "next": {
+                                        "name": "SECOND_SCREEN",
+                                        "type": "screen"
+                                    },
+                                    "payload": {}
+                                }
+                            },
+                            {
+                                "id": "health",
+                                "main-content": {
+                                    "title": "Health Insurance",
+                                    "metadata": "Get essential coverage for doctor visits, prescriptions, and hospital stays"
+                                },
+                                "end": {
+                                    "title": "$80",
+                                    "description": "/ month"
+                                },
+                                "on-click-action": {
+                                    "name": "navigate",
+                                    "next": {
+                                        "name": "SECOND_SCREEN",
+                                        "type": "screen"
+                                    },
+                                    "payload": {}
+                                }
+                            },
+                            {
+                                "id": "intergalactic",
+                                "main-content": {
+                                    "title": "Intergalactic Insurance",
+                                    "metadata": "Enjoy coverage for asteroid collisions, alien encounters, and other risks"
+                                },
+                                "end": {
+                                    "title": "$1.000",
+                                    "description": "/ month"
+                                },
+                                "on-click-action": {
+                                    "name": "navigate",
+                                    "next": {
+                                        "name": "FOURTH_SCREEN",
+                                        "type": "screen"
+                                    },
+                                    "payload": {}
+                                }
+                            },
+                            {
+                                "id": "timetravel",
+                                "main-content": {
+                                    "title": "Time Travel Insurance",
+                                    "metadata": "Ready for paradox-related damages or unforeseen consequences of altering history"
+                                },
+                                "end": {
+                                    "title": "$980",
+                                    "description": "/ month"
+                                },
+                                "on-click-action": {
+                                    "name": "navigate",
+                                    "next": {
+                                        "name": "FIFTH_SCREEN",
+                                        "type": "screen"
+                                    },
+                                    "payload": {}
+                                }
+                            },
+                            {
+                                "id": "dream",
+                                "main-content": {
+                                    "title": "Dream Loss Insurance",
+                                    "metadata": "Protection from recurring nightmares or lost opportunities due to poor sleep"
+                                },
+                                "end": {
+                                    "title": "$540",
+                                    "description": "/ month"
+                                },
+                                "on-click-action": {
+                                    "name": "navigate",
+                                    "next": {
+                                        "name": "FIFTH_SCREEN",
+                                        "type": "screen"
+                                    },
+                                    "payload": {
+                                        "first_name": true
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "id": "DEMO_SCREEN_CHIPS",
+            "terminal": true,
+            "title": "Chip Selector Preview",
+            "layout": {
+                "type": "SingleColumnLayout",
+                "children": [
+                    {
+                        "type": "ChipsSelector",
+                        "name": "chips",
+                        "label": "Personalize your experience",
+                        "description": "Choose your interests to get personalized design ideas and solution",
+                        "max-selected-items": 2,
+                        "data-source": [
+                            {
+                                "id": "room_layout",
+                                "title": "🏡 Room layouts"
+                            },
+                            {
+                                "id": "lighting",
+                                "title": "💡 Lighting"
+                            },
+                            {
+                                "id": "renovation",
+                                "title": "🛠️ Renovation"
+                            },
+                            {
+                                "id": "furnitures",
+                                "title": "📐 Room layouts"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "Footer",
+                        "label": "Continue",
+                        "on-click-action": {
+                            "name": "complete",
+                            "payload": {}
+                        }
                     }
                 ]
             }

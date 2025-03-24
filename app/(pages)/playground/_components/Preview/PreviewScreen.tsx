@@ -5,6 +5,8 @@ import ReactMarkdown from 'react-markdown';
 import { Button } from "@/components/ui/button";
 import ContextMenu from "./PreviewContextMenu";
 import { MoreVertical, X } from "lucide-react";
+import NavigationList from "./NavList";
+import ChipsSelector from "./ChipSelector";
 
 const ScreenPreview: React.FC<ScreenPreviewProps> = ({
   screen,
@@ -16,7 +18,6 @@ const ScreenPreview: React.FC<ScreenPreviewProps> = ({
   const [menuPosition, setMenuPosition] = useState({ x: 0, y: 0 });
   const menuButtonRef = useRef(null);
 
-  // Handle menu button click
   const handleMenuClick = () => {
     if (menuButtonRef.current) {
       // @ts-ignore
@@ -29,26 +30,19 @@ const ScreenPreview: React.FC<ScreenPreviewProps> = ({
     setContextMenuOpen(!contextMenuOpen);
   };
 
-  // Close context menu
   const handleCloseMenu = () => {
     setContextMenuOpen(false);
   };
 
-  // Helper to process text content for markdown or arrays
   const processTextContent = (text: string | string[] | undefined, useMarkdown: boolean = false): string => {
     if (!text) return '';
-
-    // Handle array of strings
     if (Array.isArray(text)) {
       return text.join('\n');
     }
-
     return text;
   };
 
-  // Render different UI components based on their type
   const renderChild = (child: LayoutChild) => {
-    // Skip if not visible
     if (child.visible === false) return null;
 
     switch (child.type) {
@@ -57,7 +51,18 @@ const ScreenPreview: React.FC<ScreenPreviewProps> = ({
           <Form
             formData={child}
             screenData={screen.data}
-            onComplete={screen.terminal ? onFinish : onNext}
+            onComplete={(screen.terminal || false) ? onFinish : onNext}
+          />
+        );
+      case "ChipsSelector":
+        return (
+          // @ts-ignore
+          <ChipsSelector 
+            name={child.name!}
+            label={child.label}
+            description={child.description}
+            max-selected-items={child["max-selected-items"]}
+            data-source={child["data-source"]}
           />
         );
       case "TextHeading":
@@ -100,14 +105,26 @@ const ScreenPreview: React.FC<ScreenPreviewProps> = ({
             </ReactMarkdown>
           </div>
         );
+      case "EmbeddedLink":
+        return (
+          <div className="text-emerald-500 hover:bg-emerald-100 p-3 text-center rounded-full">
+            {child.text}
+          </div>
+        )
+
+      case "NavigationList":
+        return (
+          <NavigationList name={child.name} listItems={child["list-items"]} />
+        )
+
       case "Footer":
         return (
           <div className="mt-auto">
             <Button
               className="w-full py-3 rounded-md bg-emerald-500 hover:bg-emerald-600 text-white"
-              onClick={screen.terminal ? onFinish : onNext}
+              onClick={(screen.terminal || false) ? onFinish : onNext}
             >
-              {child.label || (screen.terminal ? "Finish" : "Continue")}
+              {child.label || ((screen.terminal || false) ? "Finish" : "Continue")}
             </Button>
           </div>
         );
@@ -118,7 +135,6 @@ const ScreenPreview: React.FC<ScreenPreviewProps> = ({
 
   return (
     <div className="flex flex-col h-full bg-white rounded-lg overflow-hidden shadow-md max-w-md mx-auto relative">
-      {/* Header */}
       <div className="bg-gray-100 p-3 flex items-center justify-between">
         <button
           className="p-1 rounded-full hover:bg-gray-200"
@@ -142,8 +158,7 @@ const ScreenPreview: React.FC<ScreenPreviewProps> = ({
         position={menuPosition}
       />
 
-      {/* Screen content */}
-      <div className="flex-1 p-4 flex flex-col overflow-y-auto">
+      <div className="flex-1 p-4 flex flex-col overflow-y-auto relative">
         {screen.layout.children.map((child, index) => (
           <React.Fragment key={index}>
             {renderChild(child)}
@@ -151,7 +166,6 @@ const ScreenPreview: React.FC<ScreenPreviewProps> = ({
         ))}
       </div>
 
-      {/* Footer disclaimer */}
       <div className="text-xs text-center text-gray-400 p-2 border-t">
         Managed by the business. <span className="text-green-500">Learn more</span>
       </div>
@@ -159,4 +173,4 @@ const ScreenPreview: React.FC<ScreenPreviewProps> = ({
   );
 };
 
-export default ScreenPreview
+export default ScreenPreview;
