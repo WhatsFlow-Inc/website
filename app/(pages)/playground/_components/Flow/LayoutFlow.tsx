@@ -182,7 +182,6 @@ export default function LayoutFlow  ()  {
             onPaneClick={onPaneClick}
             nodeTypes={nodeTypes}
             edgeTypes={edgeTypes}
-            colorMode='dark'
             fitView
             panOnScroll
             selectionOnDrag

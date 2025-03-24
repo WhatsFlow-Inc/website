@@ -8,7 +8,7 @@ export const wapJSON: WapJSON = {
     "screens": [
         {
             "id": "DEMO_SCREEN",
-            "title": "Demo Screen",
+            "title": "Form Preview",
             "terminal": true,
             "layout": {
                 "type": "SingleColumnLayout",
@@ -101,7 +101,7 @@ export const wapJSON: WapJSON = {
         },
         {
             "id": "DEMO_SCREEN_1",
-            "title": "Demo Screen 1",
+            "title": "Basic Text Preview",
             "terminal": false,
             "layout": {
                 "type": "SingleColumnLayout",
@@ -163,7 +163,7 @@ export const wapJSON: WapJSON = {
         },
         {
             "id": "CHECKBOX_DEMO_SCREEN",
-            "title": "Demo screen",
+            "title": "Checkbox Preview",
             "terminal": true,
             "data": {
                 "all_extras": [
@@ -238,6 +238,100 @@ export const wapJSON: WapJSON = {
                             "name": "complete",
                             "payload": {}
                         }
+                    }
+                ]
+            }
+        }, 
+        {
+            "id": "DEMO_SCREEN_R",
+            "terminal": true,
+            "title": "Radio Buttons Preview",
+            "data": {
+                "all_appointment_types": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "string"
+                            },
+                            "title": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "__example__": [
+                        {
+                            "id": "1",
+                            "title": "Online"
+                        },
+                        {
+                            "id": "2",
+                            "title": "In Person"
+                        }
+                    ]
+                }
+            },
+            "layout": {
+                "type": "SingleColumnLayout",
+                "children": [
+                    {
+                        "type": "Form",
+                        "name": "text_input_form",
+                        "children": [
+                            {
+                                "type": "RadioButtonsGroup",
+                                "name": "appointment_type",
+                                "label": "Appointment type",
+                                "description": "Choose your preferred appointment type",
+                                "required": true,
+                                "data-source": "${data.all_appointment_types}",
+                                "on-select-action": {
+                                    "name": "data_exchange",
+                                    "payload": {
+                                        "appointment_type": "${form.appointment_type}"
+                                    }
+                                }
+                            },
+                            {
+                                "type": "Footer",
+                                "label": "Continue",
+                                "on-click-action": {
+                                    "name": "data_exchange",
+                                    "payload": {}
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "id": "DEMO_SCREEN_OPT_IN",
+            "title": "Opt In Preview",
+            "terminal":false,
+            "layout": {
+                "type": "SingleColumnLayout",
+                "children": [
+                    {
+                        "type": "Form",
+                        "name": "text_input_form",
+                        "children": [
+                            {
+                                "type": "OptIn",
+                                "name": "OptIn",
+                                "label": "This is an OptIn",
+                                "required": true,
+                                "on-click-action": {
+                                    "name": "navigate",
+                                    "next": {
+                                        "type": "screen",
+                                        "name": "NEXT_SCREEN"
+                                    },
+                                    "payload": {}
+                                }
+                            }
+                        ]
                     }
                 ]
             }

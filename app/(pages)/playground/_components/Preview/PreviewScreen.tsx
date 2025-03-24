@@ -104,7 +104,7 @@ const ScreenPreview: React.FC<ScreenPreviewProps> = ({
         return (
           <div className="mt-auto">
             <Button
-              className="w-full bg-gray-200 hover:bg-gray-300 text-gray-600 py-3 rounded-full"
+              className="w-full py-3 rounded-md bg-emerald-500 hover:bg-emerald-600 text-white"
               onClick={screen.terminal ? onFinish : onNext}
             >
               {child.label || (screen.terminal ? "Finish" : "Continue")}

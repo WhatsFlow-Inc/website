@@ -1,3 +1,5 @@
+import { Control } from "react-hook-form";
+
 export interface WapJSON {
     version: string;
     screens: Screen[];
@@ -21,6 +23,10 @@ export interface LayoutChild {
     "on-click-action"?: {
         name: string;
         payload: Record<string, any>;
+        next?:{
+          type?:string;
+          name?:string;
+        }
     };
     "on-select-action"?: {
         name: string;
@@ -100,4 +106,12 @@ export interface ScreenPreviewProps {
   onNext: () => void;
   onFinish: () => void;
   onBack: () => void;
+}
+
+export interface OptInProps {
+  control: Control<any>;
+  name: string;
+  label: string;
+  required?: boolean;
+  onClickAction?: any;
 }

@@ -152,7 +152,6 @@ export default function Chat() {
                             </SelectContent>
                         </Select>
                     <div className="flex items-center gap-2">
-                        <ModeToggle />
                         <Button
                             size="sm"
                             variant="outline"

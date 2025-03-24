@@ -68,7 +68,7 @@ const CustomNode = ({ data, selected, id }: { data: { label: string }, selected:
                 style={{
                     paddingInline: 10,
                     paddingBlock: 5,
-                    backgroundColor: 'black',
+                    backgroundColor: 'white',
                     borderRadius: '10px',
                     border: "gray 1px solid",
                     height: "100%",
