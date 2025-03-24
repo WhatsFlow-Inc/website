@@ -1,7 +1,7 @@
 'use client'
-import Chat from './_components/Chat/Chat'
-import Flow from './_components/Flow/Flow'
-import Preview from './_components/Preview/Preview'
+import Chat from '../../../components/playground/Chat/Chat'
+import Flow from '../../../components/playground/Flow/Flow'
+import Preview from '../../../components/playground/Preview/Preview'
 import { useResizable } from 'react-resizable-layout';
 
 const Page = () => {

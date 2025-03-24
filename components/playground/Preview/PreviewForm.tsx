@@ -9,7 +9,7 @@ import CheckboxGroupField from "./CheckboxGroup";
 import OptIn from "./OptIn";
 import { ChevronRight, X, XCircle } from "lucide-react";
 import { useState } from "react";
-import { DatePicker } from "@/components/playground/DatePicker";
+import { DatePicker } from "@/components/playground/Preview/DatePicker";
 
 // Define the DropdownProps interface
 interface DropdownProps {
