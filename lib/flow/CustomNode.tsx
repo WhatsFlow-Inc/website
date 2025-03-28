@@ -61,7 +61,7 @@ const CustomNode = ({ data, selected, id }: { data: { label: string }, selected:
                 isVisible={selected}
                 minWidth={100}
                 minHeight={30}
-                color='white'
+                color='black'
             />
             <Handle type="target" position={Position.Top} />
             <div

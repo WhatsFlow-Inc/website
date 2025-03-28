@@ -117,7 +117,7 @@ const Form: React.FC<FormProps> = ({ formData, screenData, onComplete }) => {
 
   return (
     <FormRoot {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="w-full">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="w-full relative">
         {(formData.children || []).map((child: any, index: number) => {
           if (child.type === "TextInput") {
             return (
@@ -134,6 +134,7 @@ const Form: React.FC<FormProps> = ({ formData, screenData, onComplete }) => {
                       <Input
                         type={child["input-type"] || "text"}
                         placeholder={child.placeholder || ""}
+                        className="h-6"
                         pattern={child.pattern}
                         {...field}
                         value={field.value || ""}
@@ -238,18 +239,6 @@ const Form: React.FC<FormProps> = ({ formData, screenData, onComplete }) => {
               <div key={index} className="my-2">
                 <DatePicker />
               </div>
-            );
-          }
-
-          if (child.type === "Footer") {
-            return (
-              <Button
-                key={index}
-                type="submit"
-                className="w-full py-3 rounded-md bg-emerald-500 hover:bg-emerald-600 text-white absolute bottom-2"
-              >
-                {child.label || "Continue"}
-              </Button>
             );
           }
 

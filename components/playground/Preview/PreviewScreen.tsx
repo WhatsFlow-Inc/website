@@ -67,19 +67,19 @@ const ScreenPreview: React.FC<ScreenPreviewProps> = ({
         );
       case "TextHeading":
         return child.markdown ? (
-          <div className="text-2xl font-bold mb-4">
+          <div className="text-xl font-bold mb-4">
             <ReactMarkdown>{processTextContent(child.text, true)}</ReactMarkdown>
           </div>
         ) : (
-          <h1 className="text-2xl font-bold mb-4">{processTextContent(child.text)}</h1>
+          <h1 className="text-xl font-bold mb-4">{processTextContent(child.text)}</h1>
         );
       case "TextSubheading":
         return child.markdown ? (
-          <div className="text-xl font-semibold mb-3">
+          <div className="text-lg font-semibold mb-3">
             <ReactMarkdown>{processTextContent(child.text, true)}</ReactMarkdown>
           </div>
         ) : (
-          <h2 className="text-xl font-semibold mb-3">{processTextContent(child.text)}</h2>
+          <h2 className="text-lg font-semibold mb-3">{processTextContent(child.text)}</h2>
         );
       case "TextBody":
         return child.markdown ? (
@@ -116,26 +116,14 @@ const ScreenPreview: React.FC<ScreenPreviewProps> = ({
         return (
           <NavigationList name={child.name} listItems={child["list-items"]} />
         )
-
-      case "Footer":
-        return (
-          <div className="mt-auto">
-            <Button
-              className="w-full py-3 rounded-md bg-emerald-500 hover:bg-emerald-600 text-white"
-              onClick={(screen.terminal || false) ? onFinish : onNext}
-            >
-              {child.label || ((screen.terminal || false) ? "Finish" : "Continue")}
-            </Button>
-          </div>
-        );
       default:
         return null;
     }
   };
 
   return (
-    <div className="flex flex-col h-full bg-white rounded-lg overflow-hidden shadow-md max-w-md mx-auto relative">
-      <div className="bg-gray-100 p-3 flex items-center justify-between">
+    <div className="flex flex-col bg-white rounded-lg overflow-hidden shadow-md w-full h-[95%] mx-auto absolute bottom-0">
+      <div className="p-3 border-b-2 flex items-center justify-between">
         <button
           className="p-1 rounded-full hover:bg-gray-200"
           onClick={onBack}
@@ -164,6 +152,15 @@ const ScreenPreview: React.FC<ScreenPreviewProps> = ({
             {renderChild(child)}
           </React.Fragment>
         ))}
+      </div>
+
+      <div className="mt-auto flex items-center justify-center py-3">
+        <Button
+          className="w-11/12 rounded-md bg-emerald-500 hover:bg-emerald-600 text-white"
+          onClick={(screen.terminal || false) ? onFinish : onNext}
+        >
+          {(screen.terminal || false) ? "Continue" : "Proceed"}
+        </Button>
       </div>
 
       <div className="text-xs text-center text-gray-400 p-2 border-t">

@@ -8,8 +8,8 @@ const ContextMenu: React.FC<ContextMenuProps> = ({ isOpen, onClose, position }) 
         <div
             className="absolute bg-white rounded-md shadow-lg py-1 z-10"
             style={{
-                top: position.y + 'px',
-                right: position.x + 'px',
+                top: 50 + 'px',
+                right: 5 + 'px',
                 minWidth: '150px'
             }}
         >

@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
 import { useState } from "react"
-import { PlaygroundMessage } from "./playground-message"
+import { PlaygroundMessage } from "../Flow/playground-message"
 
 const AI_MODELS = [
   { id: "gpt-4", name: "GPT-4" },

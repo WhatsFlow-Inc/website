@@ -4,7 +4,9 @@ import { Store } from "lucide-react";
 
 const ChatPreview: React.FC<ChatPreviewProps> = ({ onStartPreview }) => {
     return (
-        <div className="flex flex-col h-full bg-gray-100 rounded-lg overflow-hidden shadow-md max-w-md mx-auto">
+        <div 
+            className="flex flex-col rounded-lg overflow-hidden shadow-md h-full mx-auto"
+        >
             {/* Header */}
             <div className="bg-gray-200 p-3 flex items-center">
                 <div className="bg-green-500 rounded-full p-2">

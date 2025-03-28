@@ -32,27 +32,22 @@ const Preview = () => {
   };
 
   return (
-    <div className="p-4 h-screen flex flex-col items-center justify-center bg-gray-50 text-gray-500">
-      {!showPreview ? (
+    <div className="p-4 h-screen flex flex-col items-center justify-center text-gray-500 text-xs">
+      <ScreenSelector
+        screens={wapJSON.screens}
+        currentScreenIndex={currentScreenIndex}
+        onSelectScreen={handleSelectScreen}
+      />
+      <div className='h-[458px] w-[256px] relative'>
         <ChatPreview onStartPreview={handleStartPreview} />
-      ) : (
-        <>
-          {/* Screen selector placed above the phone UI */}
-          <ScreenSelector
-            screens={wapJSON.screens}
-            currentScreenIndex={currentScreenIndex}
-            onSelectScreen={handleSelectScreen}
-          />
-
-          {/* Phone UI */}
-          <ScreenPreview
+        {showPreview ?
+          < ScreenPreview
             screen={wapJSON.screens[currentScreenIndex]}
             onNext={handleNextScreen}
             onFinish={handleFinish}
             onBack={handleBackToChat}
-          />
-        </>
-      )}
+          /> : ""}
+      </div>
     </div>
   );
 };
